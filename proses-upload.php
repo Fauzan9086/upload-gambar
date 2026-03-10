@@ -1,8 +1,7 @@
 <?php
-
 $gambar = $_FILES['gambar'];
-$namaFile =$gambar['name'];
-$ukuran =$gambar['size'];
+$namaFile = $gambar['name'];
+$ukuran = $gambar['size'];
 $tmp = $gambar['tmp_name'];
 
 $folder = "uploads/";
@@ -23,13 +22,17 @@ if ($ukuran > 1000000) {
 }
 
 // rename file agar unik
-$namaBaru =uniqid() . '.' . $ekstensi;
+$namaBaru = uniqid() . '.' . $ekstensi;
 
 // pindahkan filel ke folder uploads
 if (move_uploaded_file($tmp, $folder . $namaBaru)) {
     echo "<div class='alert alert-success'>File berhasil diupload.</div>";
     echo "<img src='" . $folder . $namaBaru . "' alt='Gambar' class='img-fluid mt-3'>";
+
+    header("location: gallery.php");
+    exit;
+
 } else {
     echo "<div class='alert alert-danger'>Terjadi kesalahan saat mengupload file.</div>";
 }
-
+?>
